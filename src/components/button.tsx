@@ -1,6 +1,9 @@
-import { Loader } from './loader';
+import { ComponentPropsWithoutRef } from "react";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import { cn } from "../lib/utils";
+import { Loader } from "./loader";
+
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: React.ReactNode;
   onClick: () => void;
   loading?: boolean;
@@ -8,13 +11,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = ({
   children,
-  onClick,
   loading,
+  onClick,
+  className,
   ...props
 }: ButtonProps) => {
   return (
     <button
-      className="flex items-center justify-center gap-4 py-2 px-6 rounded-full text-white font-medium bg-orange-600 hover:bg-orange-500 transition-all"
+      className={cn(
+        "flex items-center justify-center gap-4 rounded-full bg-orange-600 px-6 py-2 font-medium text-white transition-all hover:bg-orange-500",
+        className,
+      )}
       onClick={onClick}
       disabled={loading}
       {...props}

@@ -1,15 +1,11 @@
-import { Layout } from './components/layout';
-import { Navbar } from './components/navbar';
-import { Products } from './components/products';
+import { Layout, Navbar, Products } from "./components";
 
 function App() {
   return (
-    <>
-      <Layout>
-        <Navbar />
-        <Products />
-      </Layout>
-    </>
+    <Layout>
+      <Navbar />
+      <Products />
+    </Layout>
   );
 }
 

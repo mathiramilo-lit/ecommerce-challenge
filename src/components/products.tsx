@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-import { Product } from '../types';
-import { ProductsList } from './products-list';
-import { Button } from './button';
+import { Product } from "../types";
+import { ProductsList } from "./products-list";
+import { Button } from "./button";
 
 const LIMIT = 30;
 
@@ -24,7 +24,7 @@ export const Products = () => {
 
     try {
       const res = await axios.get(
-        `https://dummyjson.com/products?limit=${LIMIT}&skip=${pagination.skip}`
+        `https://dummyjson.com/products?limit=${LIMIT}&skip=${pagination.skip}`,
       );
       setProducts((prev) => [...prev, ...res.data.products]);
       setPagination((prev) => ({
@@ -45,7 +45,7 @@ export const Products = () => {
 
       try {
         const res = await axios.get(
-          `https://dummyjson.com/products?limit=${LIMIT}`
+          `https://dummyjson.com/products?limit=${LIMIT}`,
         );
         setProducts(res.data.products);
         setPagination((prev) => ({
@@ -56,9 +56,9 @@ export const Products = () => {
       } catch (error) {
         console.log(error);
         setError({
-          title: 'Something went wrong',
+          title: "Something went wrong",
           description:
-            'We are sorry! We could not fetch the products from the server. Please try again later.',
+            "We are sorry! We could not fetch the products from the server. Please try again later.",
         });
       } finally {
         setLoading(false);
@@ -71,7 +71,7 @@ export const Products = () => {
   return (
     <main className="flex flex-col gap-16">
       <ProductsList products={products} loading={loading} error={error} />
-      <footer className="w-full flex items-center justify-center">
+      <footer className="flex w-full items-center justify-center">
         {!allProductsFetched && (
           <Button onClick={handleLoadMore} loading={loadMoreLoading}>
             Load more

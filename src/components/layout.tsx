@@ -1,7 +1,17 @@
-interface LayoutProps {
+import { ComponentPropsWithoutRef } from "react";
+import { cn } from "../lib/utils";
+
+interface LayoutProps extends ComponentPropsWithoutRef<"div"> {
   children: React.ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
-  return <div className="max-w-4xl mx-auto p-10">{children}</div>;
+export const Layout = ({ children, className, ...props }: LayoutProps) => {
+  return (
+    <div
+      className={cn("mx-auto flex max-w-4xl flex-col gap-12 p-10", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 };
