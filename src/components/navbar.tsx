@@ -10,13 +10,16 @@ type NavbarProps = ComponentPropsWithoutRef<"header">;
 export const Navbar = ({ className, ...props }: NavbarProps) => {
   return (
     <header
-      className={cn("flex items-center justify-between", className)}
+      className={cn("flex items-center justify-between bg-white", className)}
       {...props}
     >
       <div className="flex items-center gap-8">
-        <div className="flex items-center justify-center rounded-full border-2 border-orange-600 p-2">
+        <button
+          className="flex items-center justify-center rounded-full border-2 border-orange-600 p-2"
+          onClick={() => {}}
+        >
           <HamburgerMenu />
-        </div>
+        </button>
         <h1 className="text-2xl font-medium text-techie-gray-900">
           Find what you need
         </h1>
