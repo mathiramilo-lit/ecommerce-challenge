@@ -1,0 +1,9 @@
+export { default as AltArrowDown } from "./alt-arrow-down.svg";
+export { default as AltArrowLeft } from "./alt-arrow-left.svg";
+export { default as AltArrowRight } from "./alt-arrow-right.svg";
+export { default as AltArrowUp } from "./alt-arrow-up.svg";
+export { default as CloseCircle } from "./close-circle.svg";
+export { default as HamburgerMenu } from "./hamburger-menu.svg";
+export { default as Heart } from "./heart.svg";
+export { default as Magnifier } from "./magnifier.svg";
+export { default as SortVertical } from "./sort-vertical.svg";
