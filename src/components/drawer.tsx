@@ -33,7 +33,7 @@ export const Drawer = ({ open, setOpen }: DrawerProps) => {
                   <CloseCircle />
                 </button>
 
-                <div className="relative flex flex-1 flex-col gap-8 transition-all duration-500">
+                <div className="relative flex flex-1 flex-col gap-8">
                   {/* Your content */}
                   <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
                     <span className="font-medium text-orange-600">New In</span>

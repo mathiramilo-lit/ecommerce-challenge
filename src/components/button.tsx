@@ -1,10 +1,11 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
 import { cn } from "../lib/utils";
 import { Loader } from "./loader";
 
-interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-  children: React.ReactNode;
+interface ButtonProps
+  extends ComponentPropsWithoutRef<"button">,
+    PropsWithChildren {
   onClick: () => void;
   loading?: boolean;
 }

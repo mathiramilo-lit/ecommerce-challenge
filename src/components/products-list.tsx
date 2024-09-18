@@ -21,7 +21,7 @@ export const ProductsList = ({
     return (
       <div className="flex min-h-96 w-full flex-col items-center justify-center gap-8 px-12">
         <Loader className="h-12 w-12 border-t-4 border-t-orange-600" />
-        <p>We are fetching some awesome products</p>
+        <p className="text-center">We are fetching some awesome products</p>
       </div>
     );
 

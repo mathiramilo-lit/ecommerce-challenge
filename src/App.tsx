@@ -6,11 +6,13 @@ function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <Layout>
+    <>
       <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
-      <Navbar setDrawerOpen={() => setDrawerOpen((prev) => !prev)} />
-      <Products />
-    </Layout>
+      <Layout>
+        <Navbar setDrawerOpen={() => setDrawerOpen((prev) => !prev)} />
+        <Products />
+      </Layout>
+    </>
   );
 }
 
