@@ -1,9 +1,14 @@
-import { Layout, Navbar, Products } from "./components";
+import { useState } from "react";
+
+import { Drawer, Layout, Navbar, Products } from "./components";
 
 function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <Layout>
-      <Navbar />
+      <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
+      <Navbar setDrawerOpen={() => setDrawerOpen((prev) => !prev)} />
       <Products />
     </Layout>
   );

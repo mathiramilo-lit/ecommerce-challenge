@@ -5,9 +5,11 @@ import { cn } from "../lib/utils";
 import { SearchBar } from "./search-bar";
 import { SortBy } from "./sort-by";
 
-type NavbarProps = ComponentPropsWithoutRef<"header">;
+interface NavbarProps extends ComponentPropsWithoutRef<"header"> {
+  setDrawerOpen: () => void;
+}
 
-export const Navbar = ({ className, ...props }: NavbarProps) => {
+export const Navbar = ({ className, setDrawerOpen, ...props }: NavbarProps) => {
   return (
     <header
       className={cn("flex items-center justify-between bg-white", className)}
@@ -16,7 +18,7 @@ export const Navbar = ({ className, ...props }: NavbarProps) => {
       <div className="flex items-center gap-8">
         <button
           className="flex items-center justify-center rounded-full border-2 border-orange-600 p-2"
-          onClick={() => {}}
+          onClick={setDrawerOpen}
         >
           <HamburgerMenu />
         </button>
