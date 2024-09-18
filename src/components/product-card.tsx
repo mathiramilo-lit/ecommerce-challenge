@@ -1,4 +1,4 @@
-import Heart from "../assets/heart.svg";
+import { Heart } from "../assets";
 import { Product } from "../types";
 
 interface ProductCardProps {

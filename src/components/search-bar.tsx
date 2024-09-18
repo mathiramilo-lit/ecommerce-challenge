@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 
-import Magnifier from "../assets/magnifier.svg";
+import { Magnifier } from "../assets";
 import { cn } from "../lib/utils";
 
 type SearchBarProps = ComponentPropsWithoutRef<"div">;

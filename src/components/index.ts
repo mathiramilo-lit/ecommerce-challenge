@@ -6,6 +6,6 @@ export * from "./loader";
 export * from "./navbar";
 export * from "./product-card";
 export * from "./products-list";
-export * from "./products";
+export * from "./main";
 export * from "./search-bar";
 export * from "./sort-by";

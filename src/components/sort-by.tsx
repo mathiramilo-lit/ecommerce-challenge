@@ -1,8 +1,25 @@
 import { useState } from "react";
 
-import AltArrowDown from "../assets/alt-arrow-down.svg";
-import SortVertical from "../assets/sort-vertical.svg";
+import { AltArrowDown, SortVertical } from "../assets";
 import { cn } from "../lib/utils";
+
+const SORT_OPTIONS = [
+  {
+    label: "Price - from high to low",
+    sortBy: "price",
+    order: "asc",
+  },
+  {
+    label: "Price - from low to high",
+    sortBy: "price",
+    order: "desc",
+  },
+  {
+    label: "Alphabetical",
+    sortBy: "title",
+    order: "asc",
+  },
+];
 
 export const SortBy = () => {
   const [open, setOpen] = useState(false);
@@ -36,15 +53,11 @@ export const SortBy = () => {
         <button className="text-start" onClick={() => {}}>
           My favorites
         </button>
-        <button className="text-start" onClick={() => {}}>
-          Price - from high to low
-        </button>
-        <button className="text-start" onClick={() => {}}>
-          Price - from low to high
-        </button>
-        <button className="text-start" onClick={() => {}}>
-          Alphabetical order
-        </button>
+        {SORT_OPTIONS.map((option) => (
+          <button className="text-start" onClick={() => {}}>
+            {option.label}
+          </button>
+        ))}
       </div>
     </div>
   );

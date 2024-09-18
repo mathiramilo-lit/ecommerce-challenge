@@ -1,7 +1,6 @@
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
-import CloseCircle from "../assets/close-circle.svg";
-import AltArrowRight from "../assets/alt-arrow-right.svg";
+import { CloseCircle, AltArrowRight } from "../assets";
 
 interface DrawerProps {
   open: boolean;
