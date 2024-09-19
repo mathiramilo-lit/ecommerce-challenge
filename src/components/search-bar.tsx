@@ -17,7 +17,7 @@ export const SearchBar = ({ className, ...props }: SearchBarProps) => {
       <input
         type="text"
         placeholder="Search"
-        className="flex-1 bg-transparent outline-none"
+        className="font-text flex-1 bg-transparent outline-none"
       />
       <Magnifier />
     </div>

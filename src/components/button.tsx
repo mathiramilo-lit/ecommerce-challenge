@@ -23,7 +23,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "flex items-center justify-center gap-4 rounded-full bg-orange-600 px-6 py-2 font-medium text-white transition-all hover:bg-orange-500",
+        "font-text flex items-center justify-center gap-4 rounded-full bg-orange-600 px-6 py-2 font-semibold text-white transition-all hover:bg-orange-500",
         className,
       )}
       onClick={onClick}

@@ -23,7 +23,7 @@ export const Navbar = ({ className, setDrawerOpen, ...props }: NavbarProps) => {
           >
             <HamburgerMenu />
           </button>
-          <h1 className="text-2xl font-medium text-techie-gray-900">
+          <h1 className="font-title text-2xl font-medium text-techie-gray-900">
             Find what you need
           </h1>
         </div>

@@ -33,7 +33,7 @@ export const SortBy = () => {
         )}
         onClick={() => setOpen((prev) => !prev)}
       >
-        <span className="hidden min-w-28 text-start text-techie-gray-300 md:block">
+        <span className="font-text hidden min-w-28 text-start text-techie-gray-300 md:block">
           Sort by
         </span>
         <div className="hidden md:block">
@@ -50,11 +50,11 @@ export const SortBy = () => {
           open && "flex",
         )}
       >
-        <button className="text-start" onClick={() => {}}>
+        <button className="font-text text-start" onClick={() => {}}>
           My favorites
         </button>
         {SORT_OPTIONS.map((option) => (
-          <button className="text-start" onClick={() => {}}>
+          <button className="font-text text-start" onClick={() => {}}>
             {option.label}
           </button>
         ))}
