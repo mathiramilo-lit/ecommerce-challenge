@@ -7,7 +7,7 @@ interface MainProps {
   loading?: boolean;
   error?: CustomError;
   allProductsFetched?: boolean;
-  handleLoadMore: () => void;
+  handleLoadMore: () => Promise<void>;
   loadMoreLoading?: boolean;
 }
 

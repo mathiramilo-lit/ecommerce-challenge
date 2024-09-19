@@ -1,4 +1,4 @@
-import { Product } from "../types";
+import { CustomError, Product } from "../types";
 import { Error } from "./error";
 import { Loader } from "./loader";
 import { ProductCard } from "./product-card";
@@ -6,10 +6,7 @@ import { ProductCard } from "./product-card";
 interface ProductsListProps {
   products: Product[];
   loading?: boolean;
-  error?: {
-    title: string;
-    description?: string;
-  };
+  error?: CustomError;
 }
 
 export const ProductsList = ({

@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 import { Drawer, Layout, Navbar, Main } from "./components";
-import axios from "axios";
 import { Product, CustomError } from "./types";
 
 const LIMIT = 30;
@@ -73,7 +73,7 @@ function App() {
     <>
       <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
       <Layout>
-        <Navbar setDrawerOpen={() => setDrawerOpen((prev) => !prev)} />
+        <Navbar setDrawerOpen={setDrawerOpen} />
         <Main
           products={products}
           loading={loading}

@@ -6,8 +6,8 @@ interface ErrorProps {
 export const Error = ({ title, description }: ErrorProps) => {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <h6 className="text-xl font-medium text-red-600 text-center">{title}</h6>
-      <p className="text-techie-gray-600 text-center">{description}</p>
+      <h6 className="text-center text-xl font-medium text-red-600">{title}</h6>
+      <p className="text-center text-techie-gray-600">{description}</p>
     </div>
   );
 };

@@ -1,10 +1,8 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
 import { cn } from "../lib/utils";
 
-interface LayoutProps extends ComponentPropsWithoutRef<"div"> {
-  children: React.ReactNode;
-}
+type LayoutProps = ComponentPropsWithoutRef<"div"> & PropsWithChildren;
 
 export const Layout = ({ children, className, ...props }: LayoutProps) => {
   return (

@@ -1,14 +1,17 @@
-import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import {
+  ComponentPropsWithoutRef,
+  MouseEventHandler,
+  PropsWithChildren,
+} from "react";
 
 import { cn } from "../lib/utils";
 import { Loader } from "./loader";
 
-interface ButtonProps
-  extends ComponentPropsWithoutRef<"button">,
-    PropsWithChildren {
-  onClick: () => void;
-  loading?: boolean;
-}
+type ButtonProps = ComponentPropsWithoutRef<"button"> &
+  PropsWithChildren & {
+    onClick: MouseEventHandler<HTMLButtonElement>;
+    loading?: boolean;
+  };
 
 export const Button = ({
   children,

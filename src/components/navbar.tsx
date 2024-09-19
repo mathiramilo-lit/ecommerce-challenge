@@ -1,13 +1,13 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
 
 import { HamburgerMenu } from "../assets";
 import { cn } from "../lib/utils";
 import { SearchBar } from "./search-bar";
 import { SortBy } from "./sort-by";
 
-interface NavbarProps extends ComponentPropsWithoutRef<"header"> {
-  setDrawerOpen: () => void;
-}
+type NavbarProps = ComponentPropsWithoutRef<"header"> & {
+  setDrawerOpen: Dispatch<SetStateAction<boolean>>;
+};
 
 export const Navbar = ({ className, setDrawerOpen, ...props }: NavbarProps) => {
   return (
@@ -19,7 +19,7 @@ export const Navbar = ({ className, setDrawerOpen, ...props }: NavbarProps) => {
         <div className="flex items-center gap-8">
           <button
             className="flex items-center justify-center rounded-full md:border-2 md:border-orange-600 md:p-2"
-            onClick={setDrawerOpen}
+            onClick={() => setDrawerOpen((prev) => !prev)}
           >
             <HamburgerMenu />
           </button>
