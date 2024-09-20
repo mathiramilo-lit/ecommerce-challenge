@@ -1,5 +1,5 @@
-import { Heart } from "../assets";
-import { Product } from "../types";
+import { Heart } from '../assets';
+import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;
@@ -13,11 +13,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <article className="flex flex-col items-center justify-between gap-6">
       <div className="flex flex-col items-center justify-center gap-2">
-        <img src={product.images[0]} alt={product.title} className="h-64" />
-        <h2 className="font-title text-center text-xl font-normal text-techie-gray-900">
+        <img
+          src={product.images[0]}
+          alt={product.title}
+          loading="lazy"
+          className="h-64 rounded-md"
+        />
+        <h2 className="text-center font-title text-xl font-normal text-techie-gray-900">
           {product.title}
         </h2>
-        <p className="font-text line-clamp-3 text-center text-sm font-light text-techie-gray-600">
+        <p className="line-clamp-3 text-center font-text text-sm font-light text-techie-gray-600">
           {product.description}
         </p>
       </div>

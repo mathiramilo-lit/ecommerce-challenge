@@ -1,18 +1,31 @@
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 
-import { HamburgerMenu } from "../assets";
-import { cn } from "../lib/utils";
-import { SearchBar } from "./search-bar";
-import { SortBy } from "./sort-by";
+import { HamburgerMenu } from '../assets';
+import { cn } from '../lib/utils';
 
-type NavbarProps = ComponentPropsWithoutRef<"header"> & {
+type NavbarProps = ComponentPropsWithoutRef<'header'> & {
   setDrawerOpen: Dispatch<SetStateAction<boolean>>;
+  title?: string;
+  rightElement?: ReactNode;
+  extraRowElement?: ReactNode;
 };
 
-export const Navbar = ({ className, setDrawerOpen, ...props }: NavbarProps) => {
+export const Navbar = ({
+  className,
+  setDrawerOpen,
+  title,
+  rightElement,
+  extraRowElement,
+  ...props
+}: NavbarProps) => {
   return (
     <header
-      className={cn("flex flex-col gap-6 bg-white", className)}
+      className={cn('flex flex-col gap-6 bg-white', className)}
       {...props}
     >
       <div className="flex items-center justify-between">
@@ -24,16 +37,13 @@ export const Navbar = ({ className, setDrawerOpen, ...props }: NavbarProps) => {
             <HamburgerMenu />
           </button>
           <h1 className="font-title text-2xl font-medium text-techie-gray-900">
-            Find what you need
+            {title}
           </h1>
         </div>
 
-        <div className="flex items-center gap-4">
-          <SearchBar className="hidden md:flex" />
-          <SortBy />
-        </div>
+        <div className="flex items-center gap-4">{rightElement}</div>
       </div>
-      <SearchBar className="md:hidden" />
+      {extraRowElement}
     </header>
   );
 };
