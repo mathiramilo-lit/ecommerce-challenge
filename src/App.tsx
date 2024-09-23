@@ -9,12 +9,20 @@ import {
   SortBy,
   Layout,
 } from './components';
+import { SORT_OPTIONS } from './constants';
 import { useProducts, useDebounce } from './hooks';
+import { SortOption } from './types';
+
+export type SortState = Omit<SortOption, 'label'>;
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebounce(query, 300);
+
+  const [sort, setSort] = useState<SortState>();
+
   const {
     products,
     loading,
@@ -24,6 +32,7 @@ function App() {
     allProductsFetched,
   } = useProducts({
     query: debouncedQuery,
+    sort,
   });
 
   return (
@@ -39,7 +48,15 @@ function App() {
                 className="hidden md:flex"
                 onChangeQuery={(e) => setQuery(e.target.value)}
               />
-              <SortBy />
+              <SortBy
+                options={SORT_OPTIONS}
+                setSort={(sortBy, order) =>
+                  setSort({
+                    sortBy,
+                    order,
+                  })
+                }
+              />
             </>
           }
           extraRowElement={

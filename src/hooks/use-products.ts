@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 import { Product, CustomError } from '../types';
+import { SortState } from '../app';
 
 const ROWS = 10;
 const LIMIT = ROWS * 3;
 
 export interface UseProductsOptions {
   query?: string;
-  sort?: string;
+  sort?: SortState;
 }
 
 export const useProducts = ({ query, sort }: UseProductsOptions) => {
@@ -28,7 +29,7 @@ export const useProducts = ({ query, sort }: UseProductsOptions) => {
 
     try {
       const res = await axios.get(
-        `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}&skip=${pagination.skip}`,
+        `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}&skip=${pagination.skip}${sort ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
       );
       setProducts((prev) => [...prev, ...res.data.products]);
       setPagination((prev) => ({
@@ -49,7 +50,7 @@ export const useProducts = ({ query, sort }: UseProductsOptions) => {
 
       try {
         const res = await axios.get(
-          `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}`,
+          `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}${sort ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
         );
         console.log(res);
         setProducts(res.data.products);
@@ -71,7 +72,7 @@ export const useProducts = ({ query, sort }: UseProductsOptions) => {
     };
 
     fetchProducts();
-  }, [query]);
+  }, [query, sort]);
 
   return {
     products,
