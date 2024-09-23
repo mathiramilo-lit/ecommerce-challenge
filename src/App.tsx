@@ -9,10 +9,12 @@ import {
   SortBy,
   Layout,
 } from './components';
-import { useProducts } from './hooks';
+import { useProducts, useDebounce } from './hooks';
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 300);
   const {
     products,
     loading,
@@ -20,7 +22,9 @@ function App() {
     handleLoadMore,
     loadMoreLoading,
     allProductsFetched,
-  } = useProducts();
+  } = useProducts({
+    query: debouncedQuery,
+  });
 
   return (
     <>
@@ -31,11 +35,19 @@ function App() {
           title="Find what you need"
           rightElement={
             <>
-              <SearchBar className="hidden md:flex" />
+              <SearchBar
+                className="hidden md:flex"
+                onChangeQuery={(e) => setQuery(e.target.value)}
+              />
               <SortBy />
             </>
           }
-          extraRowElement={<SearchBar className="md:hidden" />}
+          extraRowElement={
+            <SearchBar
+              className="md:hidden"
+              onChangeQuery={(e) => setQuery(e.target.value)}
+            />
+          }
         />
         <main className="flex flex-col gap-16">
           <ProductsList products={products} loading={loading} error={error} />

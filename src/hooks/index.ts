@@ -1,1 +1,2 @@
-export * from './useProducts';
+export * from './use-debounce';
+export * from './use-products';

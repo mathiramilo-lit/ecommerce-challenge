@@ -53,8 +53,8 @@ export const SortBy = () => {
         <button className="font-text text-start" onClick={() => {}}>
           My favorites
         </button>
-        {SORT_OPTIONS.map((option) => (
-          <button className="font-text text-start" onClick={() => {}}>
+        {SORT_OPTIONS.map((option, index) => (
+          <button key={index} className="font-text text-start" onClick={() => {}}>
             {option.label}
           </button>
         ))}

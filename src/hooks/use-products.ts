@@ -3,17 +3,23 @@ import { useState, useEffect } from 'react';
 
 import { Product, CustomError } from '../types';
 
-const LIMIT = 30;
+const ROWS = 10;
+const LIMIT = ROWS * 3;
 
-export const useProducts = () => {
+export interface UseProductsOptions {
+  query?: string;
+  sort?: string;
+}
+
+export const useProducts = ({ query, sort }: UseProductsOptions) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<CustomError>();
   const [pagination, setPagination] = useState({
     skip: 0,
     total: 0,
   });
-  const [loading, setLoading] = useState(false);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
-  const [error, setError] = useState<CustomError>();
 
   const allProductsFetched = pagination.skip >= pagination.total;
 
@@ -22,7 +28,7 @@ export const useProducts = () => {
 
     try {
       const res = await axios.get(
-        `https://dummyjson.com/products?limit=${LIMIT}&skip=${pagination.skip}`,
+        `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}&skip=${pagination.skip}`,
       );
       setProducts((prev) => [...prev, ...res.data.products]);
       setPagination((prev) => ({
@@ -43,8 +49,9 @@ export const useProducts = () => {
 
       try {
         const res = await axios.get(
-          `https://dummyjson.com/products?limit=${LIMIT}`,
+          `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}`,
         );
+        console.log(res);
         setProducts(res.data.products);
         setPagination((prev) => ({
           ...prev,
@@ -64,7 +71,7 @@ export const useProducts = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [query]);
 
   return {
     products,
