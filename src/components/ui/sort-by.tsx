@@ -1,18 +1,39 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { AltArrowDown, SortVertical } from '../../assets';
 import { cn } from '../../lib/utils';
-import { Order, ProductField, SortOption } from '../../types';
+import { Order, SortBy as SortByType, SortOption } from '../../types';
+import { SortState } from '../../app';
 
 interface SortByProps {
   options: SortOption[];
-  setSort: (sortBy: ProductField, order: Order) => void;
+  sort: SortState;
+  setSort: (sortBy: SortByType | undefined, order: Order | undefined) => void;
+  showFavorites: boolean;
   setShowFavorites: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SortBy = ({ options, setSort, setShowFavorites }: SortByProps) => {
+export const SortBy = ({
+  options,
+  sort,
+  setSort,
+  showFavorites,
+  setShowFavorites,
+}: SortByProps) => {
   const [open, setOpen] = useState(false);
-  const [label, setLabel] = useState('Sort By');
+  const [label, setLabel] = useState(
+    sort.sortBy && sort.order
+      ? options.find(
+          (opt) => opt.sortBy === sort.sortBy && opt.order === sort.order,
+        )?.label
+      : 'Sort By',
+  );
+
+  useEffect(() => {
+    if (!showFavorites && !sort.sortBy && !sort.order) {
+      setLabel('Sort By');
+    }
+  }, [showFavorites, sort]);
 
   return (
     <div className="relative">
@@ -45,6 +66,7 @@ export const SortBy = ({ options, setSort, setShowFavorites }: SortByProps) => {
           onClick={() => {
             setShowFavorites(true);
             setLabel('My favorites');
+            setSort(undefined, undefined);
             setOpen(false);
           }}
         >
