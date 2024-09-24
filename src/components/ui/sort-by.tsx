@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-import { AltArrowDown, SortVertical } from '../assets';
-import { cn } from '../lib/utils';
-import { Order, ProductField, SortOption } from '../types';
+import { AltArrowDown, SortVertical } from '../../assets';
+import { cn } from '../../lib/utils';
+import { Order, ProductField, SortOption } from '../../types';
 
 interface SortByProps {
   options: SortOption[];
   setSort: (sortBy: ProductField, order: Order) => void;
+  setShowFavorites: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SortBy = ({ options, setSort }: SortByProps) => {
+export const SortBy = ({ options, setSort, setShowFavorites }: SortByProps) => {
   const [open, setOpen] = useState(false);
   const [label, setLabel] = useState('Sort By');
 
@@ -39,7 +40,14 @@ export const SortBy = ({ options, setSort }: SortByProps) => {
           open && 'flex',
         )}
       >
-        <button className="text-start font-text" onClick={() => {}}>
+        <button
+          className="text-start font-text"
+          onClick={() => {
+            setShowFavorites(true);
+            setLabel('My favorites');
+            setOpen(false);
+          }}
+        >
           My favorites
         </button>
         {options.map((option, index) => (
@@ -49,6 +57,7 @@ export const SortBy = ({ options, setSort }: SortByProps) => {
             onClick={() => {
               setSort(option.sortBy, option.order);
               setLabel(option.label);
+              setShowFavorites(false);
               setOpen(false);
             }}
           >

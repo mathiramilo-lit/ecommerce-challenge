@@ -12,8 +12,13 @@ export const SORT_OPTIONS: SortOption[] = [
     order: Order.asc,
   },
   {
-    label: 'Alphabetical',
+    label: 'Alphabetical - A-Z',
     sortBy: 'title',
     order: Order.asc,
+  },
+  {
+    label: 'Alphabetical - Z-A',
+    sortBy: 'title',
+    order: Order.desc,
   },
 ];

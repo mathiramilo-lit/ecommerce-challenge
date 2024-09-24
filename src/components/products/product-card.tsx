@@ -1,14 +1,19 @@
-import { Heart } from '../assets';
-import { Product } from '../types';
+import { Product } from '../../types';
+import { HeartFill, HeartOutline } from '../../assets';
+import { useFavorites } from '../../context';
+import { useMemo } from 'react';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const handleAddToFavorites = () => {
-    alert(`Product ${product.id} added to favorites!`);
-  };
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
+
+  const isFavorite = useMemo(
+    () => Boolean(favorites.find((p) => p.id === product.id)),
+    [favorites, product.id],
+  );
 
   return (
     <article className="flex flex-col items-center justify-between gap-6">
@@ -29,9 +34,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
       <footer className="flex w-full items-center justify-between px-3">
         <span className="font-text text-sm">€{product.price}</span>
-        <button onClick={handleAddToFavorites}>
-          <span className="sr-only">Add to Favorites</span>
-          <Heart />
+        <button
+          onClick={() =>
+            isFavorite ? removeFavorite(product.id) : addFavorite(product)
+          }
+        >
+          <span className="sr-only">
+            {isFavorite ? 'Remove' : 'Add'} to Favorites
+          </span>
+          {isFavorite ? <HeartFill /> : <HeartOutline />}
         </button>
       </footer>
     </article>

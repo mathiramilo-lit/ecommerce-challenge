@@ -2,12 +2,12 @@ import {
   ComponentPropsWithoutRef,
   MouseEventHandler,
   PropsWithChildren,
-} from "react";
+} from 'react';
 
-import { cn } from "../lib/utils";
-import { Loader } from "./loader";
+import { cn } from '../../lib/utils';
+import { Loader } from '../ui/loader';
 
-type ButtonProps = ComponentPropsWithoutRef<"button"> &
+type ButtonProps = ComponentPropsWithoutRef<'button'> &
   PropsWithChildren & {
     onClick: MouseEventHandler<HTMLButtonElement>;
     loading?: boolean;
@@ -23,7 +23,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "font-text flex items-center justify-center gap-4 rounded-full bg-orange-600 px-6 py-2 font-semibold text-white transition-all hover:bg-orange-500",
+        'flex items-center justify-center gap-4 rounded-full bg-orange-600 px-6 py-2 font-text font-semibold text-white transition-all hover:bg-orange-500',
         className,
       )}
       onClick={onClick}
