@@ -30,7 +30,7 @@ export const useProducts = ({
 
     try {
       const res = await axios.get(
-        `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}&skip=${pagination.skip}${sort ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
+        `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}&skip=${pagination.skip}${sort?.sortBy && sort.order ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
       );
       setProducts((prev) => [...prev, ...res.data.products]);
       setPagination((prev) => ({
@@ -51,7 +51,7 @@ export const useProducts = ({
 
       try {
         const res = await axios.get(
-          `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}${sort ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
+          `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}${sort?.sortBy && sort.order ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
         );
         setProducts(res.data.products);
         setPagination((prev) => ({

@@ -5,11 +5,13 @@ import { cn } from '../../lib/utils';
 
 type SearchBarProps = ComponentPropsWithoutRef<'div'> & {
   onChangeQuery: ChangeEventHandler<HTMLInputElement>;
+  value: string;
 };
 
 export const SearchBar = ({
   className,
   onChangeQuery,
+  value,
   ...props
 }: SearchBarProps) => {
   return (
@@ -25,6 +27,7 @@ export const SearchBar = ({
         placeholder="Search"
         className="flex-1 bg-transparent font-text outline-none"
         onChange={onChangeQuery}
+        value={value}
       />
       <Magnifier />
     </div>
