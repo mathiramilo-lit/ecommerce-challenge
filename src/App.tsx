@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Drawer,
@@ -12,6 +12,7 @@ import {
 import { SORT_OPTIONS } from './constants';
 import { useProducts, useDebounce } from './hooks';
 import { SortOption } from './types';
+import { useFavorites } from './context';
 
 export type SortState = Omit<SortOption, 'label'>;
 
@@ -22,6 +23,9 @@ function App() {
   const debouncedQuery = useDebounce(query, 300);
 
   const [sort, setSort] = useState<SortState>();
+
+  const [showFavorites, setShowFavorites] = useState(false);
+  const { favorites } = useFavorites();
 
   const {
     products,
@@ -34,6 +38,10 @@ function App() {
     query: debouncedQuery,
     sort,
   });
+
+  useEffect(() => {
+    setShowFavorites(false);
+  }, [debouncedQuery]);
 
   return (
     <>
@@ -56,6 +64,7 @@ function App() {
                     order,
                   })
                 }
+                setShowFavorites={setShowFavorites}
               />
             </>
           }
@@ -67,9 +76,13 @@ function App() {
           }
         />
         <main className="flex flex-col gap-16">
-          <ProductsList products={products} loading={loading} error={error} />
+          <ProductsList
+            products={showFavorites ? favorites : products}
+            loading={loading}
+            error={error}
+          />
           <div className="flex w-full items-center justify-center">
-            {!allProductsFetched && (
+            {!allProductsFetched && !showFavorites && (
               <Button onClick={handleLoadMore} loading={loadMoreLoading}>
                 Load more
               </Button>

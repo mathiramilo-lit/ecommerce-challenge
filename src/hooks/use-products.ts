@@ -7,12 +7,13 @@ import { SortState } from '../app';
 const ROWS = 10;
 const LIMIT = ROWS * 3;
 
-export interface UseProductsOptions {
+export const useProducts = ({
+  query,
+  sort,
+}: {
   query?: string;
   sort?: SortState;
-}
-
-export const useProducts = ({ query, sort }: UseProductsOptions) => {
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<CustomError>();
@@ -52,7 +53,6 @@ export const useProducts = ({ query, sort }: UseProductsOptions) => {
         const res = await axios.get(
           `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}${sort ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
         );
-        console.log(res);
         setProducts(res.data.products);
         setPagination((prev) => ({
           ...prev,
