@@ -1,39 +1,35 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { AltArrowDown, SortVertical } from '@/assets';
 import { cn } from '@/lib/utils';
 import { Order, SortBy as SortByType, SortOption } from '@/types';
 import { SortState } from '@/app';
 
-interface SortByProps {
+interface SortDropdownProps {
   options: SortOption[];
-  sort: SortState;
-  setSort: (sortBy: SortByType | undefined, order: Order | undefined) => void;
+  actualSort: SortState;
+  setSort: ({ sortBy, order }: { sortBy?: SortByType; order?: Order }) => void;
   showFavorites: boolean;
   setShowFavorites: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SortBy = ({
+export const SortDropdown = ({
   options,
-  sort,
+  actualSort,
   setSort,
   showFavorites,
   setShowFavorites,
-}: SortByProps) => {
+}: SortDropdownProps) => {
   const [open, setOpen] = useState(false);
-  const [label, setLabel] = useState(
-    sort.sortBy && sort.order
-      ? options.find(
-          (opt) => opt.sortBy === sort.sortBy && opt.order === sort.order,
-        )?.label
-      : 'Sort By',
-  );
 
-  useEffect(() => {
-    if (!showFavorites && !sort.sortBy && !sort.order) {
-      setLabel('Sort By');
-    }
-  }, [showFavorites, sort]);
+  const label = showFavorites
+    ? 'My favorites'
+    : actualSort.sortBy && actualSort.order
+      ? options.find(
+          (opt) =>
+            opt.sortBy === actualSort.sortBy && opt.order === actualSort.order,
+        )?.label || 'Sort By'
+      : 'Sort By';
 
   return (
     <div className="relative">
@@ -65,20 +61,18 @@ export const SortBy = ({
           className="text-start font-text"
           onClick={() => {
             setShowFavorites(true);
-            setLabel('My favorites');
-            setSort(undefined, undefined);
+            setSort({});
             setOpen(false);
           }}
         >
           My favorites
         </button>
-        {options.map((option, index) => (
+        {options.map((option) => (
           <button
-            key={index}
+            key={option.label}
             className="text-start font-text"
             onClick={() => {
-              setSort(option.sortBy, option.order);
-              setLabel(option.label);
+              setSort({ sortBy: option.sortBy, order: option.order });
               setShowFavorites(false);
               setOpen(false);
             }}

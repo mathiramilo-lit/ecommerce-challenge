@@ -29,9 +29,10 @@ export const useProducts = ({
     setLoadMoreLoading(true);
 
     try {
-      const res = await axios.get(
-        `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}&skip=${pagination.skip}${sort?.sortBy && sort.order ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
-      );
+      const url = `https://dummyjson.com/products${query && '/search'}`;
+      const res = await axios.get(url, {
+        params: { q: query, limit: LIMIT, skip: pagination.skip, ...sort },
+      });
       setProducts((prev) => [...prev, ...res.data.products]);
       setPagination((prev) => ({
         ...prev,
@@ -50,9 +51,10 @@ export const useProducts = ({
       setLoading(true);
 
       try {
-        const res = await axios.get(
-          `https://dummyjson.com/products${query ? `/search?q=${query}&` : '?'}limit=${LIMIT}${sort?.sortBy && sort.order ? `&sortBy=${sort.sortBy}&order=${sort.order}` : ''}`,
-        );
+        const url = `https://dummyjson.com/products${query && '/search'}`;
+        const res = await axios.get(url, {
+          params: { q: query, limit: LIMIT, ...sort },
+        });
         setProducts(res.data.products);
         setPagination((prev) => ({
           ...prev,

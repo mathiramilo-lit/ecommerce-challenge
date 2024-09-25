@@ -6,4 +6,4 @@ export * from './layout';
 export * from './loader';
 export * from './navbar';
 export * from './search-bar';
-export * from './sort-by';
+export * from './sort-dropdown';
