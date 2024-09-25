@@ -5,7 +5,7 @@ import {
   Navbar,
   Button,
   SearchBar,
-  SortBy,
+  SortDropdown,
   Layout,
 } from '@/components/ui';
 import { ProductsList } from '@/components/products';
@@ -15,8 +15,8 @@ import { useFavorites } from '@/context';
 import { Order, SortBy as SortByType, isOrder, isSortBy } from '@/types';
 
 export type SortState = {
-  sortBy: SortByType | undefined;
-  order: Order | undefined;
+  sortBy?: SortByType;
+  order?: Order;
 };
 
 function App() {
@@ -62,9 +62,15 @@ function App() {
   useEffect(() => {
     const newParams = new URLSearchParams();
 
-    if (query) newParams.set('search', query);
-    if (sort.sortBy) newParams.set('sortBy', sort.sortBy);
-    if (sort.order) newParams.set('order', sort.order);
+    if (query) {
+      newParams.set('search', query);
+    }
+    if (sort.sortBy) {
+      newParams.set('sortBy', sort.sortBy);
+    }
+    if (sort.order) {
+      newParams.set('order', sort.order);
+    }
 
     const newUrl = `${window.location.pathname}?${newParams.toString()}`;
     window.history.replaceState(null, '', newUrl);
@@ -84,10 +90,10 @@ function App() {
                 onChangeQuery={(e) => setQuery(e.target.value)}
                 value={query}
               />
-              <SortBy
+              <SortDropdown
                 options={SORT_OPTIONS}
-                sort={sort}
-                setSort={(sortBy, order) =>
+                actualSort={sort}
+                setSort={({ sortBy, order }) =>
                   setSort({
                     sortBy,
                     order,

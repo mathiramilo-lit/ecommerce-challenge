@@ -12,7 +12,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
   const isFavorite = useMemo(
-    () => Boolean(favorites.find((p) => p.id === product.id)),
+    () => favorites.some((p) => p.id === product.id),
     [favorites, product.id],
   );
 
