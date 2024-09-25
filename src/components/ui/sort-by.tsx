@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { AltArrowDown, SortVertical } from '../../assets';
-import { cn } from '../../lib/utils';
-import { Order, SortBy as SortByType, SortOption } from '../../types';
-import { SortState } from '../../app';
+import { AltArrowDown, SortVertical } from '@/assets';
+import { cn } from '@/lib/utils';
+import { Order, SortBy as SortByType, SortOption } from '@/types';
+import { SortState } from '@/app';
 
 interface SortByProps {
   options: SortOption[];
