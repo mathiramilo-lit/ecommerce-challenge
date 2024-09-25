@@ -1,7 +1,8 @@
-import { Product } from '../../types';
-import { HeartFill, HeartOutline } from '../../assets';
-import { useFavorites } from '../../context';
 import { useMemo } from 'react';
+
+import { HeartFill, HeartOutline } from '@/assets';
+import { useFavorites } from '@/context';
+import { Product } from '@/types';
 
 interface ProductCardProps {
   product: Product;

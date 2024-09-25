@@ -5,8 +5,8 @@ import {
   SetStateAction,
 } from 'react';
 
-import { HamburgerMenu } from '../../assets';
-import { cn } from '../../lib/utils';
+import { HamburgerMenu } from '@/assets';
+import { cn } from '@/lib/utils';
 
 type NavbarProps = ComponentPropsWithoutRef<'header'> & {
   setDrawerOpen: Dispatch<SetStateAction<boolean>>;

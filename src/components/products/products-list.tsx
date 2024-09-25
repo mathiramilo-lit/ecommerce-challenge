@@ -1,7 +1,6 @@
-import { CustomError, Product } from '../../types';
-import { Empty } from '../ui/empty';
-import { Error } from '../ui/error';
-import { Loader } from '../ui/loader';
+import { CustomError, Product } from '@/types';
+
+import { Empty, Error, Loader } from '../ui';
 import { ProductCard } from './product-card';
 
 interface ProductsListProps {

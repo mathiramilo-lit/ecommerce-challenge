@@ -3,16 +3,16 @@ import { useEffect, useState } from 'react';
 import {
   Drawer,
   Navbar,
-  ProductsList,
   Button,
   SearchBar,
   SortBy,
   Layout,
-} from './components';
-import { SORT_OPTIONS } from './constants';
-import { useProducts, useDebounce } from './hooks';
-import { useFavorites } from './context';
-import { Order, SortBy as SortByType, isOrder, isSortBy } from './types';
+} from '@/components/ui';
+import { ProductsList } from '@/components/products';
+import { SORT_OPTIONS } from '@/constants';
+import { useProducts, useDebounce } from '@/hooks';
+import { useFavorites } from '@/context';
+import { Order, SortBy as SortByType, isOrder, isSortBy } from '@/types';
 
 export type SortState = {
   sortBy: SortByType | undefined;

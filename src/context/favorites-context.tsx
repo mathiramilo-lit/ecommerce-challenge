@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-import { type Product } from '../types';
+import { type Product } from '@/types';
 
 interface FavoritesContext {
   favorites: Product[];

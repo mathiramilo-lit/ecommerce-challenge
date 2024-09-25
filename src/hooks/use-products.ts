@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import { Product, CustomError } from '../types';
-import { SortState } from '../app';
+import { Product, CustomError } from '@/types';
+import { SortState } from '@/app';
 
 const ROWS = 10;
 const LIMIT = ROWS * 3;

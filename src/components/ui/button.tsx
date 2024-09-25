@@ -4,8 +4,9 @@ import {
   PropsWithChildren,
 } from 'react';
 
-import { cn } from '../../lib/utils';
-import { Loader } from '../ui/loader';
+import { cn } from '@/lib/utils';
+
+import { Loader } from './loader';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> &
   PropsWithChildren & {

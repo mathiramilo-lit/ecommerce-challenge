@@ -1,4 +1,4 @@
-import { Order, SortOption } from '../types';
+import { Order, SortOption } from '@/types';
 
 export const SORT_OPTIONS: SortOption[] = [
   {

@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ChangeEventHandler } from 'react';
 
-import { Magnifier } from '../../assets';
-import { cn } from '../../lib/utils';
+import { Magnifier } from '@/assets';
+import { cn } from '@/lib/utils';
 
 type SearchBarProps = ComponentPropsWithoutRef<'div'> & {
   onChangeQuery: ChangeEventHandler<HTMLInputElement>;
