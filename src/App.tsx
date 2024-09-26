@@ -12,13 +12,8 @@ import {
 import { SORT_OPTIONS } from "@/constants";
 import { useFavorites } from "@/context";
 import { useDebounce, useProducts } from "@/hooks";
-import {
-  isOrder,
-  isSortBy
-  
-  
-} from "@/types";
-import type {Order, SortBy as SortByType} from "@/types";
+import { isOrder, isSortBy } from "@/types";
+import type { Order, SortBy as SortByType } from "@/types";
 
 export interface SortState {
   sortBy?: SortByType;

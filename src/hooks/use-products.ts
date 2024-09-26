@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
-import type {SortState} from "@/app";
+import { getProducts } from "@/api";
+import type { SortState } from "@/app";
 import type { CustomError, Product } from "@/types";
 
 const ROWS = 10;
@@ -29,15 +29,17 @@ export const useProducts = ({
     setLoadMoreLoading(true);
 
     try {
-      const url = `https://dummyjson.com/products${query && "/search"}`;
-      const res = await axios.get(url, {
-        params: { q: query, limit: LIMIT, skip: pagination.skip, ...sort },
+      const data = await getProducts({
+        query,
+        limit: LIMIT,
+        skip: pagination.skip,
+        ...sort,
       });
-      setProducts((prev) => [...prev, ...res.data.products]);
+      setProducts((prev) => [...prev, ...data.products]);
       setPagination((prev) => ({
         ...prev,
-        skip: res.data.skip + LIMIT,
-        total: res.data.total,
+        skip: data.skip + LIMIT,
+        total: data.total,
       }));
     } catch (error) {
       console.log(error);
@@ -47,19 +49,20 @@ export const useProducts = ({
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (): Promise<void> => {
       setLoading(true);
 
       try {
-        const url = `https://dummyjson.com/products${query && "/search"}`;
-        const res = await axios.get(url, {
-          params: { q: query, limit: LIMIT, ...sort },
+        const data = await getProducts({
+          query,
+          limit: LIMIT,
+          ...sort,
         });
-        setProducts(res.data.products);
+        setProducts(data.products);
         setPagination((prev) => ({
           ...prev,
-          skip: res.data.skip + LIMIT,
-          total: res.data.total,
+          skip: data.skip + LIMIT,
+          total: data.total,
         }));
       } catch (error) {
         console.log(error);
@@ -73,7 +76,7 @@ export const useProducts = ({
       }
     };
 
-    fetchProducts();
+    void fetchProducts();
   }, [query, sort]);
 
   return {

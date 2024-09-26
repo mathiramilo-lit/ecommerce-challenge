@@ -1,14 +1,7 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-  
-} from "react";
-import type {ReactNode} from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import type { ReactNode } from "react";
 
-import type {Product} from "@/types";
+import type { Product } from "@/types";
 
 interface FavoritesContext {
   favorites: Product[];
@@ -36,8 +29,9 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   }, [favorites]);
 
   useEffect(() => {
-    const storageFavorites: Product[] =
-      JSON.parse(localStorage.getItem("favorites") ?? "") || [];
+    const storageFavorites: Product[] = JSON.parse(
+      localStorage.getItem("favorites") ?? "[]",
+    ) as Product[];
     setFavorites(storageFavorites);
   }, []);
 

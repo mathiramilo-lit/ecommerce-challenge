@@ -27,6 +27,7 @@ export default [
       "public/build/",
       ".storybook/",
       "**/reports/",
+      "vite.config.ts",
     ],
   },
   ...fixupConfigRules(
