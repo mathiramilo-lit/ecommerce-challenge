@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
+import type { Category } from "@/api";
+import { getCategories } from "@/api";
 import { AltArrowRight, CloseCircle } from "@/assets";
 
 interface DrawerProps {
@@ -9,6 +12,17 @@ interface DrawerProps {
 }
 
 export const Drawer = ({ open, setOpen }: DrawerProps) => {
+  const [categories, setCategories] = useState<Category[]>();
+
+  useEffect(() => {
+    const fetchCategories = async (): Promise<void> => {
+      const data = await getCategories();
+      setCategories(data);
+    };
+
+    void fetchCategories();
+  }, []);
+
   return (
     <Dialog
       open={open}
@@ -22,7 +36,7 @@ export const Drawer = ({ open, setOpen }: DrawerProps) => {
 
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="pointer-events-none fixed inset-y-0 left-0 flex w-[80%] max-w-full pr-10 md:w-80">
+          <div className="pointer-events-none fixed inset-y-0 left-0 flex w-[80%] max-w-full pr-10 md:w-96">
             <DialogPanel
               transition
               className="pointer-events-auto relative w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:-translate-x-full sm:duration-500"
@@ -35,36 +49,20 @@ export const Drawer = ({ open, setOpen }: DrawerProps) => {
 
                 <div className="relative flex flex-1 flex-col gap-8">
                   {/* Your content */}
-                  <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-text font-semibold text-orange-600">
-                      New In
-                    </span>
-                    <AltArrowRight />
-                  </button>
-                  <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-text font-semibold text-orange-600">
-                      Clothing
-                    </span>
-                    <AltArrowRight />
-                  </button>
-                  <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-text font-semibold text-orange-600">
-                      Footwear
-                    </span>
-                    <AltArrowRight />
-                  </button>
-                  <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-text font-semibold text-orange-600">
-                      Accesories
-                    </span>
-                    <AltArrowRight />
-                  </button>
-                  <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-text font-semibold text-orange-600">
-                      SALE
-                    </span>
-                    <AltArrowRight />
-                  </button>
+                  {categories?.map((category) => (
+                    <button
+                      key={category.slug}
+                      className="flex w-full items-center justify-between transition-opacity hover:opacity-60"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <span className="font-text font-semibold text-orange-600">
+                        {category.name}
+                      </span>
+                      <AltArrowRight />
+                    </button>
+                  ))}
                 </div>
               </div>
             </DialogPanel>
