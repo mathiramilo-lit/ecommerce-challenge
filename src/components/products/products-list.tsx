@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import type { CustomError, Product } from "@/types";
 import { Empty, Error, Loader } from "../ui";
 import { ProductCard } from "./product-card";
@@ -41,10 +43,15 @@ export const ProductsList = ({
     );
 
   return (
-    <div className="grid gap-12 px-12 md:grid-cols-3">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="grid gap-12 px-12 md:grid-cols-3 -z-10"
+    >
       {products.map((p) => (
         <ProductCard key={p.id} product={p} />
       ))}
-    </div>
+    </motion.div>
   );
 };
