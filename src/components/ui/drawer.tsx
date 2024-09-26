@@ -1,11 +1,11 @@
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { Dispatch, SetStateAction } from 'react';
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 
-import CloseCircle from "../assets/close-circle.svg";
-import AltArrowRight from "../assets/alt-arrow-right.svg";
+import { CloseCircle, AltArrowRight } from '@/assets';
 
 interface DrawerProps {
   open: boolean;
-  setOpen: (bool: boolean) => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Drawer = ({ open, setOpen }: DrawerProps) => {
@@ -36,29 +36,33 @@ export const Drawer = ({ open, setOpen }: DrawerProps) => {
                 <div className="relative flex flex-1 flex-col gap-8">
                   {/* Your content */}
                   <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-medium text-orange-600">New In</span>
+                    <span className="font-text font-semibold text-orange-600">
+                      New In
+                    </span>
                     <AltArrowRight />
                   </button>
                   <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-medium text-orange-600">
+                    <span className="font-text font-semibold text-orange-600">
                       Clothing
                     </span>
                     <AltArrowRight />
                   </button>
                   <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-medium text-orange-600">
+                    <span className="font-text font-semibold text-orange-600">
                       Footwear
                     </span>
                     <AltArrowRight />
                   </button>
                   <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-medium text-orange-600">
+                    <span className="font-text font-semibold text-orange-600">
                       Accesories
                     </span>
                     <AltArrowRight />
                   </button>
                   <button className="flex w-full items-center justify-between transition-opacity hover:opacity-60">
-                    <span className="font-medium text-orange-600">SALE</span>
+                    <span className="font-text font-semibold text-orange-600">
+                      SALE
+                    </span>
                     <AltArrowRight />
                   </button>
                 </div>

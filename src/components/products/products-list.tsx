@@ -1,15 +1,12 @@
-import { Product } from "../types";
-import { Error } from "./error";
-import { Loader } from "./loader";
-import { ProductCard } from "./product-card";
+import { CustomError, Product } from '@/types';
+
+import { Empty, Error, Loader } from '../ui';
+import { ProductCard } from './product-card';
 
 interface ProductsListProps {
   products: Product[];
   loading?: boolean;
-  error?: {
-    title: string;
-    description?: string;
-  };
+  error?: CustomError;
 }
 
 export const ProductsList = ({
@@ -21,7 +18,9 @@ export const ProductsList = ({
     return (
       <div className="flex min-h-96 w-full flex-col items-center justify-center gap-8 px-12">
         <Loader className="h-12 w-12 border-t-4 border-t-orange-600" />
-        <p className="text-center">We are fetching some awesome products</p>
+        <p className="text-center font-text">
+          We are fetching some awesome products
+        </p>
       </div>
     );
 
@@ -29,6 +28,16 @@ export const ProductsList = ({
     return (
       <div className="flex min-h-96 w-full flex-col items-center justify-center gap-8 px-12">
         <Error title={error.title} description={error.description} />
+      </div>
+    );
+
+  if (!products.length)
+    return (
+      <div className="flex min-h-96 w-full flex-col items-center justify-center gap-8 px-12">
+        <Empty
+          title="We can not find any products!"
+          description="There are not products that match your filters. Please try again removing some."
+        />
       </div>
     );
 
