@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
+import { motion } from "framer-motion";
 
 import type { SortState } from "@/app";
 import { AltArrowDown, SortVertical } from "@/assets";
@@ -32,6 +33,11 @@ export const SortDropdown = ({
         )?.label ?? "Sort By")
       : "Sort By";
 
+  const variants = {
+    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, y: -5 },
+  };
+
   return (
     <div className="relative">
       <button
@@ -52,9 +58,11 @@ export const SortDropdown = ({
         </div>
       </button>
 
-      <div
+      <motion.div
+        animate={open ? "open" : "closed"}
+        variants={variants}
         className={cn(
-          "absolute right-0 top-12 hidden w-[60vw] flex-col gap-3 rounded-md border border-techie-gray-300 bg-white p-4 py-5 shadow-md md:w-[150%]",
+          "absolute right-0 z-10 top-12 hidden w-[60vw] flex-col gap-3 rounded-md border border-techie-gray-300 bg-white p-4 py-5 shadow-md md:w-[150%]",
           open && "flex",
         )}
       >
@@ -81,7 +89,7 @@ export const SortDropdown = ({
             {option.label}
           </button>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
