@@ -33,7 +33,7 @@ export const useProducts = ({
         query,
         limit: LIMIT,
         skip: pagination.skip,
-        ...sort,
+        sort: { ...sort },
       });
       setProducts((prev) => [...prev, ...data.products]);
       setPagination((prev) => ({
@@ -56,7 +56,7 @@ export const useProducts = ({
         const data = await getProducts({
           query,
           limit: LIMIT,
-          ...sort,
+          sort: { ...sort },
         });
         setProducts(data.products);
         setPagination((prev) => ({
