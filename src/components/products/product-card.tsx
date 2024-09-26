@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { HeartFill, HeartOutline } from '@/assets';
-import { useFavorites } from '@/context';
-import { Product } from '@/types';
+import { HeartFill, HeartOutline } from "@/assets";
+import { useFavorites } from "@/context";
+import type { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
@@ -41,7 +41,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           }
         >
           <span className="sr-only">
-            {isFavorite ? 'Remove' : 'Add'} to Favorites
+            {isFavorite ? "Remove" : "Add"} to Favorites
           </span>
           {isFavorite ? <HeartFill /> : <HeartOutline />}
         </button>

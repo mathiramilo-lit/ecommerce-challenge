@@ -1,4 +1,4 @@
-export type CustomError = {
+export interface CustomError {
   title: string;
   description: string;
-};
+}

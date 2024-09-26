@@ -1,11 +1,12 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-import { FavoritesProvider } from './context';
-import App from './app.tsx';
-import './index.css';
+import App from "./app.tsx";
+import { FavoritesProvider } from "./context";
 
-createRoot(document.getElementById('root')!).render(
+import "./index.css";
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <FavoritesProvider>
       <App />

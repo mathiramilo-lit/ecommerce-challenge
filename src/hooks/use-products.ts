@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import { Product, CustomError } from '@/types';
-import { SortState } from '@/app';
+import type {SortState} from "@/app";
+import type { CustomError, Product } from "@/types";
 
 const ROWS = 10;
 const LIMIT = ROWS * 3;
@@ -29,7 +29,7 @@ export const useProducts = ({
     setLoadMoreLoading(true);
 
     try {
-      const url = `https://dummyjson.com/products${query && '/search'}`;
+      const url = `https://dummyjson.com/products${query && "/search"}`;
       const res = await axios.get(url, {
         params: { q: query, limit: LIMIT, skip: pagination.skip, ...sort },
       });
@@ -51,7 +51,7 @@ export const useProducts = ({
       setLoading(true);
 
       try {
-        const url = `https://dummyjson.com/products${query && '/search'}`;
+        const url = `https://dummyjson.com/products${query && "/search"}`;
         const res = await axios.get(url, {
           params: { q: query, limit: LIMIT, ...sort },
         });
@@ -64,9 +64,9 @@ export const useProducts = ({
       } catch (error) {
         console.log(error);
         setError({
-          title: 'Something went wrong',
+          title: "Something went wrong",
           description:
-            'We are sorry! We could not fetch the products from the server. Please try again later.',
+            "We are sorry! We could not fetch the products from the server. Please try again later.",
         });
       } finally {
         setLoading(false);

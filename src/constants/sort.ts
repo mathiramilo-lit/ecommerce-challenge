@@ -1,24 +1,25 @@
-import { Order, SortOption } from '@/types';
+import { Order  } from "@/types";
+import type {SortOption} from "@/types";
 
 export const SORT_OPTIONS: SortOption[] = [
   {
-    label: 'Price - from high to low',
-    sortBy: 'price',
+    label: "Price - from high to low",
+    sortBy: "price",
     order: Order.desc,
   },
   {
-    label: 'Price - from low to high',
-    sortBy: 'price',
+    label: "Price - from low to high",
+    sortBy: "price",
     order: Order.asc,
   },
   {
-    label: 'Alphabetical - A-Z',
-    sortBy: 'title',
+    label: "Alphabetical - A-Z",
+    sortBy: "title",
     order: Order.asc,
   },
   {
-    label: 'Alphabetical - Z-A',
-    sortBy: 'title',
+    label: "Alphabetical - Z-A",
+    sortBy: "title",
     order: Order.desc,
   },
 ];

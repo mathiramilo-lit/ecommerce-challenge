@@ -1,23 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
+import { ProductsList } from "@/components/products";
 import {
-  Drawer,
-  Navbar,
   Button,
+  Drawer,
+  Layout,
+  Navbar,
   SearchBar,
   SortDropdown,
-  Layout,
-} from '@/components/ui';
-import { ProductsList } from '@/components/products';
-import { SORT_OPTIONS } from '@/constants';
-import { useProducts, useDebounce } from '@/hooks';
-import { useFavorites } from '@/context';
-import { Order, SortBy as SortByType, isOrder, isSortBy } from '@/types';
+} from "@/components/ui";
+import { SORT_OPTIONS } from "@/constants";
+import { useFavorites } from "@/context";
+import { useDebounce, useProducts } from "@/hooks";
+import {
+  isOrder,
+  isSortBy
+  
+  
+} from "@/types";
+import type {Order, SortBy as SortByType} from "@/types";
 
-export type SortState = {
+export interface SortState {
   sortBy?: SortByType;
   order?: Order;
-};
+}
 
 function App() {
   const params = new URLSearchParams(window.location.search);
@@ -25,18 +31,18 @@ function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const [debouncedQuery, query, setQuery] = useDebounce(
-    params.get('search') || '',
+    params.get("search") ?? "",
     300,
   );
 
   const [sort, setSort] = useState<SortState>({
     sortBy:
-      params.get('sortBy') && isSortBy(params.get('sortBy'))
-        ? (params.get('sortBy') as SortByType)
+      params.get("sortBy") && isSortBy(params.get("sortBy"))
+        ? (params.get("sortBy") as SortByType)
         : undefined,
     order:
-      params.get('order') && isOrder(params.get('order'))
-        ? (params.get('order') as Order)
+      params.get("order") && isOrder(params.get("order"))
+        ? (params.get("order") as Order)
         : undefined,
   });
 
@@ -63,17 +69,17 @@ function App() {
     const newParams = new URLSearchParams();
 
     if (query) {
-      newParams.set('search', query);
+      newParams.set("search", query);
     }
     if (sort.sortBy) {
-      newParams.set('sortBy', sort.sortBy);
+      newParams.set("sortBy", sort.sortBy);
     }
     if (sort.order) {
-      newParams.set('order', sort.order);
+      newParams.set("order", sort.order);
     }
 
     const newUrl = `${window.location.pathname}?${newParams.toString()}`;
-    window.history.replaceState(null, '', newUrl);
+    window.history.replaceState(null, "", newUrl);
   }, [query, sort]);
 
   return (

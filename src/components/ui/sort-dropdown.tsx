@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
-import { AltArrowDown, SortVertical } from '@/assets';
-import { cn } from '@/lib/utils';
-import { Order, SortBy as SortByType, SortOption } from '@/types';
-import { SortState } from '@/app';
+import type { SortState } from "@/app";
+import { AltArrowDown, SortVertical } from "@/assets";
+import { cn } from "@/lib/utils";
+import type { Order, SortBy as SortByType, SortOption } from "@/types";
 
 interface SortDropdownProps {
   options: SortOption[];
@@ -23,20 +24,20 @@ export const SortDropdown = ({
   const [open, setOpen] = useState(false);
 
   const label = showFavorites
-    ? 'My favorites'
+    ? "My favorites"
     : actualSort.sortBy && actualSort.order
-      ? options.find(
+      ? (options.find(
           (opt) =>
             opt.sortBy === actualSort.sortBy && opt.order === actualSort.order,
-        )?.label || 'Sort By'
-      : 'Sort By';
+        )?.label ?? "Sort By")
+      : "Sort By";
 
   return (
     <div className="relative">
       <button
         className={cn(
-          'relative flex items-center gap-2 rounded-md transition-all focus-within:border-orange-600 md:border md:border-techie-gray-300 md:p-2',
-          open && 'border-orange-600',
+          "relative flex items-center gap-2 rounded-md transition-all focus-within:border-orange-600 md:border md:border-techie-gray-300 md:p-2",
+          open && "border-orange-600",
         )}
         onClick={() => setOpen((prev) => !prev)}
       >
@@ -53,8 +54,8 @@ export const SortDropdown = ({
 
       <div
         className={cn(
-          'absolute right-0 top-12 hidden w-[60vw] flex-col gap-3 rounded-md border border-techie-gray-300 bg-white p-4 py-5 shadow-md md:w-[150%]',
-          open && 'flex',
+          "absolute right-0 top-12 hidden w-[60vw] flex-col gap-3 rounded-md border border-techie-gray-300 bg-white p-4 py-5 shadow-md md:w-[150%]",
+          open && "flex",
         )}
       >
         <button

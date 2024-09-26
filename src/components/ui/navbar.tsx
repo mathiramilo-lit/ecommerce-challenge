@@ -1,14 +1,14 @@
-import {
+import type {
   ComponentPropsWithoutRef,
   Dispatch,
   ReactNode,
   SetStateAction,
-} from 'react';
+} from "react";
 
-import { HamburgerMenu } from '@/assets';
-import { cn } from '@/lib/utils';
+import { HamburgerMenu } from "@/assets";
+import { cn } from "@/lib/utils";
 
-type NavbarProps = ComponentPropsWithoutRef<'header'> & {
+type NavbarProps = ComponentPropsWithoutRef<"header"> & {
   setDrawerOpen: Dispatch<SetStateAction<boolean>>;
   title?: string;
   rightElement?: ReactNode;
@@ -25,7 +25,7 @@ export const Navbar = ({
 }: NavbarProps) => {
   return (
     <header
-      className={cn('flex flex-col gap-6 bg-white', className)}
+      className={cn("flex flex-col gap-6 bg-white", className)}
       {...props}
     >
       <div className="flex items-center justify-between">

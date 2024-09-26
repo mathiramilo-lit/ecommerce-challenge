@@ -1,13 +1,14 @@
 import {
   createContext,
-  type ReactNode,
   useContext,
   useEffect,
   useMemo,
-  useState,
-} from 'react';
+  useState
+  
+} from "react";
+import type {ReactNode} from "react";
 
-import { type Product } from '@/types';
+import type {Product} from "@/types";
 
 interface FavoritesContext {
   favorites: Product[];
@@ -30,13 +31,13 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (favorites.length > 0) {
-      localStorage.setItem('favorites', JSON.stringify(favorites));
+      localStorage.setItem("favorites", JSON.stringify(favorites));
     }
   }, [favorites]);
 
   useEffect(() => {
-    const storageFavorites =
-      JSON.parse(localStorage.getItem('favorites') || '') || [];
+    const storageFavorites: Product[] =
+      JSON.parse(localStorage.getItem("favorites") ?? "") || [];
     setFavorites(storageFavorites);
   }, []);
 
@@ -59,7 +60,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
 export const useFavorites = () => {
   const context = useContext(FavoritesContext);
   if (!context) {
-    throw new Error('useFavorites must be used within a FavoritesProvider');
+    throw new Error("useFavorites must be used within a FavoritesProvider");
   }
   return context;
 };

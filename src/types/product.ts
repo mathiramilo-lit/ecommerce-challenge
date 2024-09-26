@@ -1,4 +1,4 @@
-export type Product = {
+export interface Product {
   id: number;
   title: string;
   description: string;
@@ -21,25 +21,25 @@ export type Product = {
   meta: Meta;
   images: string[];
   thumbnail: string;
-};
+}
 
-type Meta = {
+interface Meta {
   createdAt: string;
   updatedAt: string;
   barcode: string;
   qrCode: string;
-};
+}
 
-type Review = {
+interface Review {
   rating: number;
   comment: string;
   date: string;
   reviewerName: string;
   reviewerEmail: string;
-};
+}
 
-type Dimensions = {
+interface Dimensions {
   width: number;
   height: number;
   depth: number;
-};
+}

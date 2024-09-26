@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+import type { Dispatch, SetStateAction } from "react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
-import { CloseCircle, AltArrowRight } from '@/assets';
+import { AltArrowRight, CloseCircle } from "@/assets";
 
 interface DrawerProps {
   open: boolean;

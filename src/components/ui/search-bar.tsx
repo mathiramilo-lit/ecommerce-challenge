@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef, ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, ComponentPropsWithoutRef } from "react";
 
-import { Magnifier } from '@/assets';
-import { cn } from '@/lib/utils';
+import { Magnifier } from "@/assets";
+import { cn } from "@/lib/utils";
 
-type SearchBarProps = ComponentPropsWithoutRef<'div'> & {
+type SearchBarProps = ComponentPropsWithoutRef<"div"> & {
   onChangeQuery: ChangeEventHandler<HTMLInputElement>;
   value: string;
 };
@@ -17,7 +17,7 @@ export const SearchBar = ({
   return (
     <div
       className={cn(
-        'flex items-center gap-2 rounded-md border border-techie-gray-300 p-2 transition-all focus-within:border-orange-600',
+        "flex items-center gap-2 rounded-md border border-techie-gray-300 p-2 transition-all focus-within:border-orange-600",
         className,
       )}
       {...props}
