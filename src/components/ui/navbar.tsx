@@ -4,6 +4,7 @@ import type {
   ReactNode,
   SetStateAction,
 } from "react";
+import { motion } from "framer-motion";
 
 import { HamburgerMenu } from "@/assets";
 import { cn } from "@/lib/utils";
@@ -28,7 +29,12 @@ export const Navbar = ({
       className={cn("flex flex-col gap-6 bg-white", className)}
       {...props}
     >
-      <div className="flex items-center justify-between">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.75, y: -10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex items-center justify-between"
+      >
         <div className="flex items-center gap-8">
           <button
             className="flex items-center justify-center rounded-full md:border-2 md:border-orange-600 md:p-2"
@@ -42,7 +48,7 @@ export const Navbar = ({
         </div>
 
         <div className="flex items-center gap-4">{rightElement}</div>
-      </div>
+      </motion.div>
       {extraRowElement}
     </header>
   );
