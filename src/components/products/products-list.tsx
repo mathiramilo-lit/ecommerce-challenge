@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 
-import type { CustomError, Product } from "@/types";
+import type { Product } from "@/types";
 import { Empty, Error, Loader } from "../ui";
 import { ProductCard } from "./product-card";
 
 interface ProductsListProps {
-  products: Product[];
+  products?: Product[];
   loading?: boolean;
-  error?: CustomError;
+  error?: Error | null;
 }
 
 export const ProductsList = ({
@@ -28,11 +28,11 @@ export const ProductsList = ({
   if (error)
     return (
       <div className="flex min-h-96 w-full flex-col items-center justify-center gap-8 px-12">
-        <Error title={error.title} description={error.description} />
+        <Error message={error.message} />
       </div>
     );
 
-  if (!products.length)
+  if (!products?.length)
     return (
       <div className="flex min-h-96 w-full flex-col items-center justify-center gap-8 px-12">
         <Empty

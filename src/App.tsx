@@ -11,7 +11,7 @@ import {
 } from "@/components/ui";
 import { SORT_OPTIONS } from "@/constants";
 import { useFavorites } from "@/context";
-import { useDebounce, useProducts } from "@/hooks";
+import { useDebounce, useInfiniteProducts } from "@/hooks";
 import { isOrder, isSortBy } from "@/types";
 import type { Order, SortBy as SortByType } from "@/types";
 
@@ -46,12 +46,12 @@ function App() {
 
   const {
     products,
-    loading,
     error,
-    handleLoadMore,
-    loadMoreLoading,
-    allProductsFetched,
-  } = useProducts({
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage,
+  } = useInfiniteProducts({
     query: debouncedQuery,
     sort,
   });
@@ -116,12 +116,16 @@ function App() {
         <main className="flex flex-col gap-16">
           <ProductsList
             products={showFavorites ? favorites : products}
-            loading={loading}
+            loading={isLoading}
             error={error}
           />
           <div className="flex w-full items-center justify-center">
-            {!allProductsFetched && !showFavorites && (
-              <Button onClick={handleLoadMore} loading={loadMoreLoading}>
+            {hasNextPage && !showFavorites && (
+              <Button
+                onClick={() => fetchNextPage()}
+                loading={isFetchingNextPage}
+                disabled={!hasNextPage || isFetchingNextPage}
+              >
                 Load more
               </Button>
             )}
