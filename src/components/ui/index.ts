@@ -1,5 +1,6 @@
 export * from "./Button";
 export * from "./Drawer";
+export * from "./DrawerButton";
 export * from "./Empty";
 export * from "./Error";
 export * from "./Layout";

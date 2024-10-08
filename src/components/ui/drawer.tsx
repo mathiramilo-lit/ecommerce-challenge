@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 
-import type { Category } from "@/api";
-import { getCategories } from "@/api";
-import { AltArrowRight, CloseCircle } from "@/assets";
+import { CloseCircle } from "@/assets";
 
-interface DrawerProps {
+interface DrawerProps extends PropsWithChildren {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Drawer = ({ open, setOpen }: DrawerProps) => {
-  const [categories, setCategories] = useState<Category[]>();
-
-  useEffect(() => {
-    const fetchCategories = async (): Promise<void> => {
-      const data = await getCategories();
-      setCategories(data);
-    };
-
-    void fetchCategories();
-  }, []);
-
+export const Drawer = ({ open, setOpen, children }: DrawerProps) => {
   return (
     <Dialog
       open={open}
@@ -48,21 +34,7 @@ export const Drawer = ({ open, setOpen }: DrawerProps) => {
                 </button>
 
                 <div className="relative flex flex-1 flex-col gap-8">
-                  {/* Your content */}
-                  {categories?.map((category) => (
-                    <button
-                      key={category.slug}
-                      className="flex w-full items-center justify-between transition-opacity hover:opacity-60"
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                    >
-                      <span className="font-text font-semibold text-orange-600">
-                        {category.name}
-                      </span>
-                      <AltArrowRight />
-                    </button>
-                  ))}
+                  {children}
                 </div>
               </div>
             </DialogPanel>

@@ -4,6 +4,7 @@ import { ProductsList } from "@/components/products";
 import {
   Button,
   Drawer,
+  DrawerButton,
   Layout,
   Navbar,
   SearchBar,
@@ -11,7 +12,12 @@ import {
 } from "@/components/ui";
 import { SORT_OPTIONS } from "@/constants";
 import { useFavorites } from "@/context";
-import { useDebounce, useProductsQuery, useURLSearchParams } from "@/hooks";
+import {
+  useCategoriesQuery,
+  useDebounce,
+  useProductsQuery,
+  useURLSearchParams,
+} from "@/hooks";
 import { isOrder, isSortBy } from "@/types";
 import type { Order, SortBy as SortByType } from "@/types";
 
@@ -60,9 +66,20 @@ function App() {
     setShowFavorites(false);
   }, [debouncedQuery]);
 
+  const { data: categories } = useCategoriesQuery();
+
   return (
     <>
-      <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
+      <Drawer open={drawerOpen} setOpen={setDrawerOpen}>
+        {categories?.map((category) => (
+          <DrawerButton
+            key={category.slug}
+            label={category.name}
+            onClick={() => setDrawerOpen(false)}
+          />
+        ))}
+      </Drawer>
+
       <Layout>
         <Navbar
           setDrawerOpen={setDrawerOpen}
