@@ -11,7 +11,7 @@ import {
 } from "@/components/ui";
 import { SORT_OPTIONS } from "@/constants";
 import { useFavorites } from "@/context";
-import { useDebounce, useProductsQuery } from "@/hooks";
+import { useDebounce, useProductsQuery, useURLSearchParams } from "@/hooks";
 import { isOrder, isSortBy } from "@/types";
 import type { Order, SortBy as SortByType } from "@/types";
 
@@ -21,23 +21,23 @@ export interface SortState {
 }
 
 function App() {
-  const params = new URLSearchParams(window.location.search);
+  const { searchParams, setSearchParams } = useURLSearchParams();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const [debouncedQuery, query, setQuery] = useDebounce(
-    params.get("search") ?? "",
+    searchParams.search ?? "",
     300,
   );
 
   const [sort, setSort] = useState<SortState>({
     sortBy:
-      params.get("sortBy") && isSortBy(params.get("sortBy"))
-        ? (params.get("sortBy") as SortByType)
+      searchParams.sortBy && isSortBy(searchParams.sortBy)
+        ? searchParams.sortBy
         : undefined,
     order:
-      params.get("order") && isOrder(params.get("order"))
-        ? (params.get("order") as Order)
+      searchParams.order && isOrder(searchParams.order)
+        ? searchParams.order
         : undefined,
   });
 
@@ -60,23 +60,6 @@ function App() {
     setShowFavorites(false);
   }, [debouncedQuery]);
 
-  useEffect(() => {
-    const newParams = new URLSearchParams();
-
-    if (query) {
-      newParams.set("search", query);
-    }
-    if (sort.sortBy) {
-      newParams.set("sortBy", sort.sortBy);
-    }
-    if (sort.order) {
-      newParams.set("order", sort.order);
-    }
-
-    const newUrl = `${window.location.pathname}?${newParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
-  }, [query, sort]);
-
   return (
     <>
       <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
@@ -88,18 +71,22 @@ function App() {
             <>
               <SearchBar
                 className="hidden md:flex"
-                onChangeQuery={(e) => setQuery(e.target.value)}
+                onChangeQuery={(e) => {
+                  setQuery(e.target.value);
+                  setSearchParams({ search: e.target.value });
+                }}
                 value={query}
               />
               <SortDropdown
                 options={SORT_OPTIONS}
                 actualSort={sort}
-                setSort={({ sortBy, order }) =>
+                setSort={({ sortBy, order }) => {
                   setSort({
                     sortBy,
                     order,
-                  })
-                }
+                  });
+                  setSearchParams({ sortBy, order });
+                }}
                 showFavorites={showFavorites}
                 setShowFavorites={setShowFavorites}
               />
