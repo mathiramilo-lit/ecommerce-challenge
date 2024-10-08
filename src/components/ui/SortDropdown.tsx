@@ -1,8 +1,7 @@
 import { useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 
-import type { SortState } from "@/app";
+import type { SortState } from "@/App";
 import { AltArrowDown, SortVertical } from "@/assets";
 import { cn } from "@/lib/utils";
 import type { Order, SortBy as SortByType, SortOption } from "@/types";
@@ -12,7 +11,7 @@ interface SortDropdownProps {
   actualSort: SortState;
   setSort: ({ sortBy, order }: { sortBy?: SortByType; order?: Order }) => void;
   showFavorites: boolean;
-  setShowFavorites: Dispatch<SetStateAction<boolean>>;
+  setShowFavorites: (value: boolean) => void;
 }
 
 export const SortDropdown = ({
