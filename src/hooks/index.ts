@@ -1,2 +1,2 @@
-export * from "./use-debounce";
-export * from "./use-infinite-products";
+export * from "./useDebounce";
+export * from "./useProductsQuery";

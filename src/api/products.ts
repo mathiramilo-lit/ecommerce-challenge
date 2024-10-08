@@ -1,4 +1,4 @@
-import type { SortState } from "@/app";
+import type { SortState } from "@/App";
 import type { Product } from "@/types";
 import { api } from "./axios";
 

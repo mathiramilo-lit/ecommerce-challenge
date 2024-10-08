@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 import type { Product } from "@/types";
 import { Empty, Error, Loader } from "../ui";
-import { ProductCard } from "./product-card";
+import { ProductCard } from "./ProductCard";
 
 interface ProductsListProps {
   products?: Product[];

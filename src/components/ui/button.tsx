@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 import { cn } from "@/lib/utils";
-import { Loader } from "./loader";
+import { Loader } from "./Loader";
 
 type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   loading?: boolean;

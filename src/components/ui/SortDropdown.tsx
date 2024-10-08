@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 
-import type { SortState } from "@/app";
+import type { SortState } from "@/App";
 import { AltArrowDown, SortVertical } from "@/assets";
 import { cn } from "@/lib/utils";
 import type { Order, SortBy as SortByType, SortOption } from "@/types";

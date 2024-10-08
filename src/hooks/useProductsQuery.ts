@@ -1,12 +1,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { getProducts } from "@/api";
-import type { SortState } from "@/app";
+import type { SortState } from "@/App";
 
 const ROWS = 10;
 const LIMIT = ROWS * 3;
 
-export const useInfiniteProducts = ({
+export const useProductsQuery = ({
   query,
   sort,
 }: {

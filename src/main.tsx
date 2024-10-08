@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
 
-import App from "./app.tsx";
+import App from "./App.tsx";
 import { FavoritesProvider } from "./context";
 
 import "./index.css";

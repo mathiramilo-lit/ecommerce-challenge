@@ -11,7 +11,7 @@ import {
 } from "@/components/ui";
 import { SORT_OPTIONS } from "@/constants";
 import { useFavorites } from "@/context";
-import { useDebounce, useInfiniteProducts } from "@/hooks";
+import { useDebounce, useProductsQuery } from "@/hooks";
 import { isOrder, isSortBy } from "@/types";
 import type { Order, SortBy as SortByType } from "@/types";
 
@@ -51,7 +51,7 @@ function App() {
     hasNextPage,
     isLoading,
     isFetchingNextPage,
-  } = useInfiniteProducts({
+  } = useProductsQuery({
     query: debouncedQuery,
     sort,
   });
