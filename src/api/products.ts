@@ -1,4 +1,4 @@
-import type { SortState } from "@/app";
+import type { SortState } from "@/App";
 import type { Product } from "@/types";
 import { api } from "./axios";
 
@@ -29,8 +29,6 @@ export const getProducts = async ({
     skip,
     ...sort,
   };
-  const res = await api.get<ProductsResponse>(path, {
-    params,
-  });
+  const res = await api.get<ProductsResponse>(path, { params });
   return res.data;
 };

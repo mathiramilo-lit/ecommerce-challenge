@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import _import from "eslint-plugin-import";
@@ -40,6 +41,7 @@ export default [
       "plugin:react/recommended",
     ),
   ),
+  ...pluginQuery.configs["flat/recommended"],
   {
     plugins: {
       "@typescript-eslint": fixupPluginRules(typescriptEslint),

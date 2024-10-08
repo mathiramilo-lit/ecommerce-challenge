@@ -1,2 +1,3 @@
-export * from "./use-debounce";
-export * from "./use-products";
+export * from "./useDebounce";
+export * from "./useProductsQuery";
+export * from "./useURLSearchParams";
