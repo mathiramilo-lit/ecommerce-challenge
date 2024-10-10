@@ -69,6 +69,8 @@ function App() {
     query: debouncedQuery,
     sort,
   });
+  
+  const { data: categories } = useCategoriesQuery();
 
   useEffect(() => {
     setShowFavorites(false);
@@ -78,9 +80,7 @@ function App() {
       url: "",
     });
   }, [debouncedQuery]);
-
-  const { data: categories } = useCategoriesQuery();
-
+  
   return (
     <>
       <Drawer open={drawerOpen} setOpen={setDrawerOpen}>
