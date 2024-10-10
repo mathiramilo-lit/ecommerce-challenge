@@ -3,6 +3,7 @@ import type { Product } from "@/types";
 import { api } from "./axios";
 
 export interface ProductsRequest {
+  category?: string;
   query?: string;
   limit: number;
   skip?: number;
@@ -17,12 +18,22 @@ export interface ProductsResponse {
 }
 
 export const getProducts = async ({
+  category,
   query,
   limit,
   skip,
   sort,
 }: ProductsRequest) => {
-  const path = query ? "/search" : "/";
+  let path = "/";
+
+  if (category && query) {
+    path = `/category/${category}`;
+  } else if (category) {
+    path = `/category/${category}`;
+  } else if (query) {
+    path = "/search";
+  }
+
   const params = {
     q: query,
     limit,

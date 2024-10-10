@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ProductsList } from "@/components/products";
 import {
+  Breadcrumbs,
   Button,
   Drawer,
   DrawerButton,
@@ -19,7 +20,7 @@ import {
   useURLSearchParams,
 } from "@/hooks";
 import { isOrder, isSortBy } from "@/types";
-import type { Order, SortBy as SortByType } from "@/types";
+import type { Category, Order, SortBy as SortByType } from "@/types";
 
 export interface SortState {
   sortBy?: SortByType;
@@ -30,6 +31,12 @@ function App() {
   const { searchParams, setSearchParams } = useURLSearchParams();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [category, setCategory] = useState<Category>({
+    name: "",
+    slug: "",
+    url: "",
+  });
 
   const [debouncedQuery, query, setQuery] = useDebounce(
     searchParams.search ?? "",
@@ -58,12 +65,18 @@ function App() {
     isLoading,
     isFetchingNextPage,
   } = useProductsQuery({
+    category: category.name,
     query: debouncedQuery,
     sort,
   });
 
   useEffect(() => {
     setShowFavorites(false);
+    setCategory({
+      name: "",
+      slug: "",
+      url: "",
+    });
   }, [debouncedQuery]);
 
   const { data: categories } = useCategoriesQuery();
@@ -75,7 +88,11 @@ function App() {
           <DrawerButton
             key={category.slug}
             label={category.name}
-            onClick={() => setDrawerOpen(false)}
+            onClick={() => {
+              setQuery("");
+              setCategory(category);
+              setDrawerOpen(false);
+            }}
           />
         ))}
       </Drawer>
@@ -118,11 +135,25 @@ function App() {
           }
         />
         <main className="flex flex-col gap-16">
-          <ProductsList
-            products={showFavorites ? favorites : products}
-            loading={isLoading}
-            error={error}
-          />
+          <section className="flex flex-col gap-12">
+            {category.name && (
+              <Breadcrumbs
+                onClick={() =>
+                  setCategory({
+                    name: "",
+                    slug: "",
+                    url: "",
+                  })
+                }
+                category={category.name}
+              />
+            )}
+            <ProductsList
+              products={showFavorites ? favorites : products}
+              loading={isLoading}
+              error={error}
+            />
+          </section>
           <div className="flex w-full items-center justify-center">
             {hasNextPage && !showFavorites && (
               <Button

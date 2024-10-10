@@ -43,3 +43,9 @@ interface Dimensions {
   height: number;
   depth: number;
 }
+
+export interface Category {
+  slug: string;
+  name: string;
+  url: string;
+}
