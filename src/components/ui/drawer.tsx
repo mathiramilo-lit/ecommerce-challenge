@@ -13,7 +13,7 @@ export const Drawer = ({ open, setOpen, children }: DrawerProps) => {
     <Dialog
       open={open}
       onClose={() => setOpen(false)}
-      className="relative z-10"
+      className="relative z-50"
     >
       <DialogBackdrop
         transition

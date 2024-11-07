@@ -47,7 +47,7 @@ export const ProductsList = ({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="grid gap-12 px-12 md:grid-cols-3 -z-10"
+      className="grid gap-12 px-12 md:grid-cols-3"
     >
       {products.map((p) => (
         <ProductCard key={p.id} product={p} />
