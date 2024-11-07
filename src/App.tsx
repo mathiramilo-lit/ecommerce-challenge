@@ -69,7 +69,7 @@ function App() {
     query: debouncedQuery,
     sort,
   });
-  
+
   const { data: categories } = useCategoriesQuery();
 
   useEffect(() => {
@@ -80,7 +80,7 @@ function App() {
       url: "",
     });
   }, [debouncedQuery]);
-  
+
   return (
     <>
       <Drawer open={drawerOpen} setOpen={setDrawerOpen}>
